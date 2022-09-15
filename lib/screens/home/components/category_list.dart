@@ -2,11 +2,24 @@ import 'package:flutter/material.dart';
 
 import 'category_item.dart';
 
-class CategoryList extends StatelessWidget {
+enum Category {
+  meal,
+  chicken,
+  beverage,
+  snacks,
+}
+
+class CategoryList extends StatefulWidget {
   const CategoryList({
     Key key,
   }) : super(key: key);
 
+  @override
+  State<CategoryList> createState() => _CategoryListState();
+}
+
+class _CategoryListState extends State<CategoryList> {
+  Category cat = Category.meal;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -16,12 +29,21 @@ class CategoryList extends StatelessWidget {
         children: [
           CategoryItem(
             title: 'Gombo Meal',
-            isActive: true,
-            press: () {},
+            isActive: cat == Category.meal,
+            press: () {
+              setState(() {
+                cat = Category.meal;
+              });
+            },
           ),
           CategoryItem(
             title: 'Chicken',
-            press: () {},
+            isActive: cat == Category.chicken,
+            press: () {
+              setState(() {
+                cat = Category.chicken;
+              });
+            },
           ),
           CategoryItem(
             title: 'Beverages',
